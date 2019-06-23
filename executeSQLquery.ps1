@@ -1,15 +1,15 @@
-Get-Content $args[0] | Foreach-Object{ # подгружаем конфиг из 1 параметра
+Get-Content $args[0] | Foreach-Object{ # РїРѕРґРіСЂСѓР¶Р°РµРј РєРѕРЅС„РёРі РёР· 1 РїР°СЂР°РјРµС‚СЂР°
    $var = $_.Split('=')
    New-Variable -Name $var[0] -Value $var[1]
 }
-$SqlConnection = New-Object System.Data.SqlClient.SqlConnection # Создаем объект соединения 
-$SqlConnection.ConnectionString = "Server=$serverName; Database=$instanceName; User ID=$userName; Password=$userPwd;" # Формируем строку подключения
-$SqlConnection.Open() # Открываем соединение
-$SqlCmd = $SqlConnection.CreateCommand() # Создаем запрос
-$SqlCmd.CommandText = Get-Content $args[1] # Получаем текст запроса из файла 2 параметра
-$objReader = $SqlCmd.ExecuteReader() # Выполняем запрос
+$SqlConnection = New-Object System.Data.SqlClient.SqlConnection # РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚ СЃРѕРµРґРёРЅРµРЅРёСЏ 
+$SqlConnection.ConnectionString = "Server=$serverName; Database=$instanceName; User ID=$userName; Password=$userPwd;" # Р¤РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
+$SqlConnection.Open() # РћС‚РєСЂС‹РІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ
+$SqlCmd = $SqlConnection.CreateCommand() # РЎРѕР·РґР°РµРј Р·Р°РїСЂРѕСЃ
+$SqlCmd.CommandText = Get-Content $args[1] # РџРѕР»СѓС‡Р°РµРј С‚РµРєСЃС‚ Р·Р°РїСЂРѕСЃР° РёР· С„Р°Р№Р»Р° 2 РїР°СЂР°РјРµС‚СЂР°
+$objReader = $SqlCmd.ExecuteReader() # Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РїСЂРѕСЃ
 while ($objReader.read()) {
-  echo $objReader.GetValue(0) # Выводим результат запроса
+  echo $objReader.GetValue(0) # Р’С‹РІРѕРґРёРј СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
 }
-$objReader.close() # Закрываем Reader результата
-$SqlConnection.close() # Закрываем соединение
+$objReader.close() # Р—Р°РєСЂС‹РІР°РµРј Reader СЂРµР·СѓР»СЊС‚Р°С‚Р°
+$SqlConnection.close() # Р—Р°РєСЂС‹РІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ
