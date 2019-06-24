@@ -7,7 +7,7 @@ $SqlConnection.ConnectionString = "Server=$serverName; Database=$instanceName; U
 $SqlConnection.Open() # Открываем соединение
 $SqlCmd = $SqlConnection.CreateCommand() # Создаем запрос
 $SqlCmd.CommandText = Get-Content $args[1] # Получаем текст запроса из файла 2 параметра
-$objReader = $SqlCmd.ExecuteReader() # Выполняем запрос
+$objReader = $SqlCmd.ExecuteReader() # Выполняем запрос, читаем результат
 while ($objReader.read()) {
   echo $objReader.GetValue(0) # Выводим результат запроса
 }
